@@ -107,7 +107,7 @@ public:
         }
     }
 private:
-    Term* termArray;  // 非零項陣列
+    Term* termArray;  
     int   capacity;   // 陣列容量
     int   terms;      // 目前項數
     static float ipow(float base, int exp) {
