@@ -2,27 +2,27 @@
 using namespace std;
 
 //-------------------------
-// å¤šé …å¼çš„ä¸€é …ï¼šcoeff * x^exp
+// ¦h¶µ¦¡ªº¤@¶µ¡Gcoeff * x^exp
 //-------------------------
 class Term {
     friend class Polynomial;
 private:
-    float coeff;  // ä¿‚æ•¸
-    int   exp;    // æŒ‡æ•¸
+    float coeff;  // «Y¼Æ
+    int   exp;    // «ü¼Æ
 };
 
 //-------------------------
-// å¤šé …å¼é¡åˆ¥ï¼ˆFig.1 + Fig.2ï¼‰
+// ¦h¶µ¦¡Ãş§O¡]Fig.1 + Fig.2¡^
 //-------------------------
 class Polynomial {
 public:
-    // å»ºæ§‹ p(x)=0
+    // «Øºc p(x)=0
     Polynomial()
         : termArray(nullptr), capacity(0), terms(0) {
         reserve(1);
     }
 
-    // æ·±æ‹·è²
+    // ²`«ş¨©
     Polynomial(const Polynomial& other)
         : termArray(nullptr), capacity(0), terms(0) {
         reserve(other.capacity);
@@ -30,7 +30,7 @@ public:
         for (int i = 0; i < terms; ++i) termArray[i] = other.termArray[i];
     }
 
-    // æŒ‡æ´¾
+    // «ü¬£
     Polynomial& operator=(const Polynomial& other) {
         if (this == &other) return *this;
         reserve(other.capacity);
@@ -39,14 +39,14 @@ public:
         return *this;
     }
 
-    // è§£æ§‹
+    // ¸Ñºc
     ~Polynomial() { delete[] termArray; }
 
-    // ------- ADT ä»‹é¢ï¼ˆFig.1ï¼‰-------
+    // ------- ADT ¤¶­±¡]Fig.1¡^-------
     // this + poly
     Polynomial Add(Polynomial poly) const {
         Polynomial res;
-        // å…©é™£åˆ—çš†ç‚ºé™å†ªï¼ˆnormalize() æœƒä¿è­‰ï¼‰
+        // ¨â°}¦C¬Ò¬°­°¾­¡]normalize() ·|«OÃÒ¡^
         int i = 0, j = 0;
         while (i < terms && j < poly.terms) {
             if (termArray[i].exp == poly.termArray[j].exp) {
@@ -65,14 +65,14 @@ public:
         }
         while (i < terms) { res.pushBack(termArray[i].coeff, termArray[i].exp); ++i; }
         while (j < poly.terms) { res.pushBack(poly.termArray[j].coeff, poly.termArray[j].exp); ++j; }
-        res.normalize(); // åˆä½µåŒå†ªï¼ˆç†è«–ä¸Šå·²åˆä½µï¼‰ï¼Œä¹Ÿè™•ç†å…¨ç‚º 0 çš„æƒ…æ³
+        res.normalize(); // ¦X¨Ö¦P¾­¡]²z½×¤W¤w¦X¨Ö¡^¡A¤]³B²z¥ş¬° 0 ªº±¡ªp
         return res;
     }
 
     // this * poly
     Polynomial Mult(Polynomial poly) const {
         Polynomial res;
-        // å…ˆåšç¬¨æ–¹æ³•ï¼šå…©å…©ç›¸ä¹˜å¾Œä¸Ÿé€² resï¼ˆæš«ä¸åˆä½µï¼‰ï¼Œæœ€å¾Œ normalize åˆä½µåŒå†ª
+        // ¥ı°µ²Â¤èªk¡G¨â¨â¬Û­¼«á¥á¶i res¡]¼È¤£¦X¨Ö¡^¡A³Ì«á normalize ¦X¨Ö¦P¾­
         for (int i = 0; i < terms; ++i) {
             for (int j = 0; j < poly.terms; ++j) {
                 float c = termArray[i].coeff * poly.termArray[j].coeff;
@@ -84,7 +84,7 @@ public:
         return res;
     }
 
-    // ä»£å…¥ f è¨ˆç®— p(f)
+    // ¥N¤J f ­pºâ p(f)
     float Eval(float f) const {
         float ans = 0.0f;
         for (int i = 0; i < terms; ++i) {
@@ -93,14 +93,14 @@ public:
         return ans;
     }
 
-    //ï¼ˆå¯é¸ï¼‰æ–°å¢ä¸€é …ï¼šçµ¦æ¸¬è©¦æˆ–å»ºæ§‹æ™‚ç”¨
+    //¡]¥i¿ï¡^·s¼W¤@¶µ¡Gµ¹´ú¸Õ©Î«Øºc®É¥Î
     void NewTerm(float c, int e) {
         if (c == 0.0f) return;
         pushBack(c, e);
         normalize();
     }
 
-    //ï¼ˆå¯é¸ï¼‰é™¤éŒ¯è¼¸å‡º
+    //¡]¥i¿ï¡^°£¿ù¿é¥X
     void debugPrint() const {
         if (terms == 0) { cout << "0"; return; }
         for (int i = 0; i < terms; ++i) {
@@ -112,14 +112,14 @@ public:
     }
 
 private:
-    // Fig.2 çš„ç§æœ‰æˆå“¡
-    Term* termArray;  // éé›¶é …é™£åˆ—
-    int   capacity;   // é™£åˆ—å®¹é‡
-    int   terms;      // ç›®å‰é …æ•¸
+    // Fig.2 ªº¨p¦³¦¨­û
+    Term* termArray;  // «D¹s¶µ°}¦C
+    int   capacity;   // °}¦C®e¶q
+    int   terms;      // ¥Ø«e¶µ¼Æ
 
-    // --------- å…§éƒ¨å·¥å…· ---------
+    // --------- ¤º³¡¤u¨ã ---------
     static float ipow(float base, int exp) {
-        // åªç”¨è¿´åœˆï¼Œä¸ç”¨ <cmath>
+        // ¥u¥Î°j°é¡A¤£¥Î <cmath>
         if (exp == 0) return 1.0f;
         float r = 1.0f;
         for (int i = 0; i < exp; ++i) r *= base;
@@ -143,18 +143,18 @@ private:
         ++terms;
     }
 
-    // å°‡ termArrayï¼š
-    // 1) ä¾æŒ‡æ•¸é™å†ªæ’åº
-    // 2) åˆä½µåŒå†ª
-    // 3) å»æ‰ä¿‚æ•¸ç‚º 0 çš„é …
+    // ±N termArray¡G
+    // 1) ¨Ì«ü¼Æ­°¾­±Æ§Ç
+    // 2) ¦X¨Ö¦P¾­
+    // 3) ¥h±¼«Y¼Æ¬° 0 ªº¶µ
     void normalize() {
         if (terms <= 1) {
-            // å¯èƒ½å–®é …ä¿‚æ•¸ç‚º 0
+            // ¥i¯à³æ¶µ«Y¼Æ¬° 0
             if (terms == 1 && termArray[0].coeff == 0.0f) terms = 0;
             return;
         }
 
-        // insertion sortï¼šä¾ exp é™å†ª
+        // insertion sort¡G¨Ì exp ­°¾­
         for (int i = 1; i < terms; ++i) {
             Term key = termArray[i];
             int k = i - 1;
@@ -165,7 +165,7 @@ private:
             termArray[k + 1] = key;
         }
 
-        // åˆä½µåŒå†ªåˆ°å‰æ®µ
+        // ¦X¨Ö¦P¾­¨ì«e¬q
         int w = 0; // write index
         for (int r = 0; r < terms; ) {
             float c = termArray[r].coeff;
@@ -184,29 +184,29 @@ private:
         }
         terms = w;
 
-        // å…¨ç‚º 0 â†’ æ¸…ç©º
+        // ¥ş¬° 0 ¡÷ ²MªÅ
         if (terms == 0) return;
     }
 };
 
 
 int main() {
-     Polynomial p, q;
-     // p = 3x^2 + 2x + 1
-     p.NewTerm(3, 2);
-     p.NewTerm(2, 1);     
-     p.NewTerm(1, 0);
+    Polynomial p, q;
+    // p = 3x^2 + 2x + 1
+    p.NewTerm(3, 2);
+    p.NewTerm(2, 1);
+    p.NewTerm(1, 0);
 
-     // q = -x^2 + 4
-     q.NewTerm(-1, 2);
-     q.NewTerm(4, 0);
+    // q = -x^2 + 4
+    q.NewTerm(-1, 2);
+    q.NewTerm(4, 0);
 
-     Polynomial s = p.Add(q);   // (3x^2 - x^2) + 2x + (1+4) = 2x^2 + 2x + 5
-     Polynomial m = p.Mult(q);  // (3x^2+2x+1)*(-x^2+4)
+    Polynomial s = p.Add(q);   // (3x^2 - x^2) + 2x + (1+4) = 2x^2 + 2x + 5
+    Polynomial m = p.Mult(q);  // (3x^2+2x+1)*(-x^2+4)
 
-     cout << "p(x) = "; p.debugPrint(); cout << "\n";
-     cout << "q(x) = "; q.debugPrint(); cout << "\n";
-     cout << "p+q  = "; s.debugPrint(); cout << "\n";
-     cout << "p*q  = "; m.debugPrint(); cout << "\n";
-     cout << "p(2) = " << p.Eval(2) << "\n";
- }
+    cout << "p(x) = "; p.debugPrint(); cout << "\n";
+    cout << "q(x) = "; q.debugPrint(); cout << "\n";
+    cout << "p+q  = "; s.debugPrint(); cout << "\n";
+    cout << "p*q  = "; m.debugPrint(); cout << "\n";
+    cout << "p(2) = " << p.Eval(2) << "\n";
+}
