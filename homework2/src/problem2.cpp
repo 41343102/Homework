@@ -182,7 +182,9 @@ int main() {
     Polynomial m = p.Mult(q);
     cout << "p+q: " << s << "\n";
     cout << "p*q: " << m << "\n";
-    float x = 2.0f;
+    float x;
+    cout << "x:";
+    cin >> x;
     cout << "p(" << x << ") = " << p.Eval(x) << "\n";
     return 0;
 }
