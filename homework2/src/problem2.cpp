@@ -4,7 +4,7 @@ using namespace std;
 class Polynomial;
 class Term {
     friend class Polynomial;
-    friend istream& operator>>(istream&, Polynomial&);  
+    friend istream& operator>>(istream&, Polynomial&);
     friend ostream& operator<<(ostream&, const Polynomial&);
 private:
     float coeff;
@@ -32,7 +32,7 @@ public:
     ~Polynomial() { delete[] termArray; }
     Polynomial Add(Polynomial poly) const {
         Polynomial res;
-        int i = 0, j = 0; 
+        int i = 0, j = 0;
         while (i < terms && j < poly.terms) {
             if (termArray[i].exp == poly.termArray[j].exp) {
                 float c = termArray[i].coeff + poly.termArray[j].coeff;
@@ -80,9 +80,9 @@ public:
     friend istream& operator>>(istream& is, Polynomial& p);
     friend ostream& operator<<(ostream& os, const Polynomial& p);
 private:
-    Term* termArray;  
-    int   capacity;  
-    int   terms;   
+    Term* termArray;
+    int   capacity;
+    int   terms;
     static float ipow(float base, int exp) {
         if (exp == 0) return 1.0f;
         float r = 1.0f;
@@ -118,7 +118,7 @@ private:
             }
             termArray[k + 1] = key;
         }
-        int w = 0; 
+        int w = 0;
         for (int r = 0; r < terms; ) {
             float c = termArray[r].coeff;
             int   e = termArray[r].exp;
@@ -134,7 +134,7 @@ private:
             }
             r = r2;
         }
-        terms = w; 
+        terms = w;
     }
 };
 istream& operator>>(istream& is, Polynomial& p) {
@@ -149,7 +149,7 @@ istream& operator>>(istream& is, Polynomial& p) {
         if (!is) return is;
         if (c != 0.0f) p.pushBack(c, e);
     }
-    p.normalize();              
+    p.normalize();
     return is;
 }
 ostream& operator<<(ostream& os, const Polynomial& p) {
