@@ -105,12 +105,15 @@ int main() {
 ## 效能分析
 
 ### 時間複雜度:
-- 
-- 
-- 
+- DFS：O(n²)
+- BFS：O(n²)
+- Connected Components：O(n²) 
    
 ### 空間複雜度:
-- 
+- 鄰接矩陣：O(n²)
+- visited 陣列：O(n)
+- queue 陣列：O(n)
+- 總空間複雜度：O(n²)
   
 ## 測試與驗證
 
