@@ -130,7 +130,15 @@ int main() {
 
 | 測試案例 | 輸入參數  |  實際輸出 ratio |
 |----------|--------------|----------|
-| 測試一    | 6 4  0 1  0 2  3 4  4 5|DFS: 0 1 2  BFS: 0 1 2  Component 1: 0 1 2  Component 2: 3 4 5  Total: 2|
+| 測試一    | 6 4 
+0 1 
+0 2 
+3 4  
+4 5|DFS: 0 1 2  
+BFS: 0 1 2  
+Component 1: 0 1 2 
+Component 2: 3 4 5 
+Total: 2|
 ### 輸入:
 ```shell
 $ ./graph.exe
