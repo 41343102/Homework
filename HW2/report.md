@@ -3,7 +3,12 @@
 ## 解題說明
 
 ### 問題描述:
-
+- 實作 Graph 圖形結構
+- 用鄰接矩陣 Adjacency Matrix 來表示圖
+- 節點之間有連線，就用 1 表示，沒有的話就是 0
+- 實作 DFS 深度優先搜尋
+- 實作 BFS 廣度優先搜尋
+- 還有用 DFS 和 BFS 來找 Connected Components 連通元件
 
 ### 解題策略:
 
