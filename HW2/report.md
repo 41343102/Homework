@@ -18,7 +18,7 @@
 - Connected Components 的做法是把所有節點都檢查一次，如果遇到還沒被拜訪過的，就從那個節點開始做 DFS，這樣就可以找出一個連通區塊
 
 ## 程式實作
-```
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -126,19 +126,7 @@ int main() {
   
 ## 測試與驗證
 
-### 測試案例
 
-| 測試案例 | 輸入參數  |  實際輸出 ratio |
-|----------|--------------|----------|
-| 測試一    | 6 4 
-0 1 
-0 2 
-3 4  
-4 5|DFS: 0 1 2  
-BFS: 0 1 2  
-Component 1: 0 1 2 
-Component 2: 3 4 5 
-Total: 2|
 ### 輸入:
 ```shell
 $ ./graph.exe
