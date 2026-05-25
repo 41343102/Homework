@@ -31,26 +31,22 @@ void insertionSort(vector<int>& arr) {
     for (int i = 1; i < arr.size(); i++) {
         int key = arr[i];
         int j = i - 1;
-
         while (j >= 0 && arr[j] > key) {
             arr[j + 1] = arr[j];
             j--;
         }
-
         arr[j + 1] = key;
     }
 }
 
 int medianOfThree(vector<int>& arr, int left, int right) {
     int mid = (left + right) / 2;
-
     if (arr[left] > arr[mid])
         swap(arr[left], arr[mid]);
     if (arr[left] > arr[right])
         swap(arr[left], arr[right]);
     if (arr[mid] > arr[right])
         swap(arr[mid], arr[right]);
-
     swap(arr[mid], arr[right - 1]);
     return arr[right - 1];
 }
@@ -60,31 +56,25 @@ void quickSort(vector<int>& arr, int left, int right) {
         int pivot = medianOfThree(arr, left, right);
         int i = left;
         int j = right - 1;
-
         while (true) {
             while (arr[++i] < pivot) {}
             while (arr[--j] > pivot) {}
-
             if (i < j)
                 swap(arr[i], arr[j]);
             else
                 break;
         }
-
         swap(arr[i], arr[right - 1]);
-
         quickSort(arr, left, i - 1);
         quickSort(arr, i + 1, right);
     } else {
         for (int p = left + 1; p <= right; p++) {
             int temp = arr[p];
             int j = p;
-
             while (j > left && arr[j - 1] > temp) {
                 arr[j] = arr[j - 1];
                 j--;
             }
-
             arr[j] = temp;
         }
     }
@@ -98,20 +88,16 @@ void merge(vector<int>& arr, vector<int>& temp, int left, int mid, int right) {
     int i = left;
     int j = mid + 1;
     int k = left;
-
     while (i <= mid && j <= right) {
         if (arr[i] <= arr[j])
             temp[k++] = arr[i++];
         else
             temp[k++] = arr[j++];
     }
-
     while (i <= mid)
         temp[k++] = arr[i++];
-
     while (j <= right)
         temp[k++] = arr[j++];
-
     for (int x = left; x <= right; x++)
         arr[x] = temp[x];
 }
@@ -119,12 +105,10 @@ void merge(vector<int>& arr, vector<int>& temp, int left, int mid, int right) {
 void mergeSort(vector<int>& arr) {
     int n = arr.size();
     vector<int> temp(n);
-
     for (int size = 1; size < n; size *= 2) {
         for (int left = 0; left < n - size; left += 2 * size) {
             int mid = left + size - 1;
             int right = min(left + 2 * size - 1, n - 1);
-
             merge(arr, temp, left, mid, right);
         }
     }
@@ -134,13 +118,10 @@ void heapify(vector<int>& arr, int n, int i) {
     int largest = i;
     int left = 2 * i + 1;
     int right = 2 * i + 2;
-
     if (left < n && arr[left] > arr[largest])
         largest = left;
-
     if (right < n && arr[right] > arr[largest])
         largest = right;
-
     if (largest != i) {
         swap(arr[i], arr[largest]);
         heapify(arr, n, largest);
@@ -161,7 +142,6 @@ void heapSort(vector<int>& arr) {
 
 void compositeSort(vector<int>& arr) {
     int n = arr.size();
-
     if (n <= 1000) {
         insertionSort(arr);
     } else if (n <= 4000) {
@@ -173,61 +153,44 @@ void compositeSort(vector<int>& arr) {
 
 vector<int> generateRandomData(int n) {
     vector<int> arr(n);
-
     for (int i = 0; i < n; i++)
         arr[i] = rand() % 100000;
-
     return arr;
 }
 
 template <typename SortFunction>
 double testSort(vector<int> arr, SortFunction sortFunction) {
     auto start = chrono::high_resolution_clock::now();
-
     sortFunction(arr);
-
     auto end = chrono::high_resolution_clock::now();
-
     chrono::duration<double> duration = end - start;
     return duration.count();
 }
 
 int main() {
     srand(time(0));
-
     int sizes[] = {500, 1000, 2000, 3000, 4000, 5000};
-
-    cout << "Homework Sorting Project" << endl;
-    cout << "======================================" << endl;
-
     for (int n : sizes) {
         vector<int> data = generateRandomData(n);
-
         cout << "\nData size: " << n << endl;
-
         cout << "Insertion Sort: "
              << testSort(data, insertionSort)
              << " sec" << endl;
-
         cout << "Quick Sort: "
              << testSort(data, [](vector<int>& arr) {
                     quickSort(arr);
                 })
              << " sec" << endl;
-
         cout << "Merge Sort: "
              << testSort(data, mergeSort)
              << " sec" << endl;
-
         cout << "Heap Sort: "
              << testSort(data, heapSort)
              << " sec" << endl;
-
         cout << "Composite Sort: "
              << testSort(data, compositeSort)
              << " sec" << endl;
     }
-
     return 0;
 }
 ```
@@ -273,18 +236,46 @@ Heap Sort
 $ g++ main.cpp --std=c++21 -o main.exe
 $ .\main.exe
 Data size: 500
-Insertion Sort: 0.0012 sec
-Quick Sort: 0.0004 sec
-Merge Sort: 0.0006 sec
-Heap Sort: 0.0007 sec
-Composite Sort: 0.0003 sec
+Insertion Sort: 0.0037596 sec
+Quick Sort: 0.0005629 sec
+Merge Sort: 0.0013243 sec
+Heap Sort: 0.00096 sec
+Composite Sort: 0.0017302 sec
 
 Data size: 1000
-Insertion Sort: 0.0045 sec
-Quick Sort: 0.0008 sec
-Merge Sort: 0.0011 sec
-Heap Sort: 0.0013 sec
-Composite Sort: 0.0006 sec
+Insertion Sort: 0.0076324 sec
+Quick Sort: 0.000477 sec
+Merge Sort: 0.000616 sec
+Heap Sort: 0.0011934 sec
+Composite Sort: 0.0072213 sec
+
+Data size: 2000
+Insertion Sort: 0.0281535 sec
+Quick Sort: 0.0008074 sec
+Merge Sort: 0.0013165 sec
+Heap Sort: 0.0025323 sec
+Composite Sort: 0.0007608 sec
+
+Data size: 3000
+Insertion Sort: 0.0609882 sec
+Quick Sort: 0.0011778 sec
+Merge Sort: 0.0020433 sec
+Heap Sort: 0.0040774 sec
+Composite Sort: 0.0013549 sec
+
+Data size: 4000
+Insertion Sort: 0.106303 sec
+Quick Sort: 0.0014956 sec
+Merge Sort: 0.0027687 sec
+Heap Sort: 0.0054019 sec
+Composite Sort: 0.0017116 sec
+
+Data size: 5000
+Insertion Sort: 0.183455 sec
+Quick Sort: 0.0020628 sec
+Merge Sort: 0.0042139 sec
+Heap Sort: 0.0074858 sec
+Composite Sort: 0.0040569 sec
 ```
 
 ## 申論及開發報告
